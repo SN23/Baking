@@ -1,17 +1,16 @@
-package com.sukhjinder.baking;
+package com.sukhjinder.baking.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Ingredient implements Parcelable
-{
+public class Ingredient implements Parcelable {
 
     @SerializedName("quantity")
     @Expose
-    private Integer quantity;
+    private double quantity;
     @SerializedName("measure")
     @Expose
     private String measure;
@@ -35,7 +34,7 @@ public class Ingredient implements Parcelable
     };
 
     protected Ingredient(Parcel in) {
-        this.quantity = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.quantity = ((double) in.readValue((double.class.getClassLoader())));
         this.measure = ((String) in.readValue((String.class.getClassLoader())));
         this.ingredient = ((String) in.readValue((String.class.getClassLoader())));
     }
@@ -43,7 +42,7 @@ public class Ingredient implements Parcelable
     public Ingredient() {
     }
 
-    public Integer getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 

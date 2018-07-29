@@ -1,4 +1,6 @@
-package com.sukhjinder.baking;
+package com.sukhjinder.baking.API;
+
+import com.sukhjinder.baking.Model.Recipe;
 
 import java.util.List;
 
@@ -7,6 +9,6 @@ import retrofit2.http.GET;
 
 public interface RecipeAPI {
 
-    @GET("/topher/2017/May/59121517_baking/baking.json")
+    @GET("baking.json")
     Call<List<Recipe>> getRecipes();
 }
