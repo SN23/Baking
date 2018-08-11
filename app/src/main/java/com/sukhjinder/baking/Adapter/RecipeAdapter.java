@@ -1,7 +1,6 @@
 package com.sukhjinder.baking.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.sukhjinder.baking.Model.Recipe;
 import com.sukhjinder.baking.R;
-import com.sukhjinder.baking.RecipeDetails;
 
 import java.util.List;
 
@@ -22,10 +20,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     private List<Recipe> recipes;
     private Context context;
+    private RecipeItemClickListener recipeItemClickListener;
 
-    public RecipeAdapter(Context context, List<Recipe> recipes) {
+
+    public RecipeAdapter(Context context, List<Recipe> recipes, RecipeItemClickListener recipeItemClickListener) {
         this.recipes = recipes;
         this.context = context;
+        this.recipeItemClickListener = recipeItemClickListener;
     }
 
     @NonNull
@@ -42,11 +43,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Recipe recipe = recipes.get(position);
-
-                Intent intent = new Intent(context, RecipeDetails.class);
-                intent.putExtra("RecipeDetails", recipe);
-                context.startActivity(intent);
+                recipeItemClickListener.onRecipeClick(recipes.get(position));
             }
         });
     }
@@ -74,7 +71,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         public void bind(final Recipe recipe) {
             recipeName.setText(recipe.getName());
             recipeServings.setText(Integer.toString(recipe.getServings()));
-            recipeSteps.setText(Integer.toString(recipe.getSteps().size()));
+            recipeSteps.setText(Integer.toString(recipe.getSteps().size() - 1));
         }
     }
+
+    public interface RecipeItemClickListener {
+        void onRecipeClick(Recipe clickedRecipe);
+    }
+
 }
