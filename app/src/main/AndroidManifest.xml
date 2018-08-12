@@ -20,9 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecipeDetails">
-            
+        <activity android:name=".RecipeDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sukhjinder.baking.MainActivity" />
         </activity>
+
     </application>
 
 </manifest>
