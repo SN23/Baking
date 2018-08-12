@@ -64,7 +64,7 @@ public class RecipeDetailsFragment extends Fragment {
         recipeStepsRecyclerView.setHasFixedSize(true);
         recipeStepsRecyclerView.setNestedScrollingEnabled(false);
         recipeStepsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recipeStepsRecyclerView.setAdapter(new RecipeStepNameAdapter(getContext(), steps, (RecipeDetailActivity) getActivity()));
+        recipeStepsRecyclerView.setAdapter(new RecipeStepNameAdapter(steps, (RecipeDetailActivity) getActivity()));
     }
 
     private void displayIngredientsList(List<Ingredient> ingredientList) {

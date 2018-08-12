@@ -1,6 +1,5 @@
 package com.sukhjinder.baking.Adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,13 +18,11 @@ import butterknife.ButterKnife;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     private List<Recipe> recipes;
-    private Context context;
     private RecipeItemClickListener recipeItemClickListener;
 
 
-    public RecipeAdapter(Context context, List<Recipe> recipes, RecipeItemClickListener recipeItemClickListener) {
+    public RecipeAdapter(List<Recipe> recipes, RecipeItemClickListener recipeItemClickListener) {
         this.recipes = recipes;
-        this.context = context;
         this.recipeItemClickListener = recipeItemClickListener;
     }
 

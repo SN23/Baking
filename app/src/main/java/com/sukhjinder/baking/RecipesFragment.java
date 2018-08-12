@@ -63,7 +63,7 @@ public class RecipesFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 recipes = response.body();
-                recipeRecyclerView.setAdapter(new RecipeAdapter(getContext(), recipes, (MainActivity) getActivity()));
+                recipeRecyclerView.setAdapter(new RecipeAdapter(recipes, (MainActivity) getActivity()));
             }
 
             @Override
