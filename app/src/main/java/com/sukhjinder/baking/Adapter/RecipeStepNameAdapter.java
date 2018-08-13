@@ -33,7 +33,7 @@ public class RecipeStepNameAdapter extends RecyclerView.Adapter<RecipeStepNameAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeStepNameAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecipeStepNameAdapter.ViewHolder holder, int position) {
         holder.bind(steps.get(position));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
