@@ -1,6 +1,7 @@
 package com.sukhjinder.baking;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.sukhjinder.baking.API.RecipeAPI;
 import com.sukhjinder.baking.Adapter.RecipeAdapter;
 import com.sukhjinder.baking.Model.Recipe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,13 +32,29 @@ public class RecipesFragment extends Fragment {
     @BindView(R.id.recipes_recycler)
     RecyclerView recipeRecyclerView;
 
-    private static String BASE_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/";
     private List<Recipe> recipes;
+    private final static String RECIPE_NAME_LIST = "recipeNameList";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        apiCall();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (recipes != null || recipes.size() > 0) {
+            outState.putParcelableArrayList(RECIPE_NAME_LIST, (ArrayList<? extends Parcelable>) recipes);
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null && savedInstanceState.containsKey(RECIPE_NAME_LIST)) {
+            recipes = savedInstanceState.getParcelableArrayList(RECIPE_NAME_LIST);
+            recipeRecyclerView.setAdapter(new RecipeAdapter(recipes, (MainActivity) getActivity()));
+        }
     }
 
     @Nullable
@@ -46,10 +64,19 @@ public class RecipesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipes, container, false);
         ButterKnife.bind(this, view);
         recyclerSetup();
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(RECIPE_NAME_LIST)) {
+            recipes = savedInstanceState.getParcelableArrayList(RECIPE_NAME_LIST);
+            recipeRecyclerView.setAdapter(new RecipeAdapter(recipes, (MainActivity) getActivity()));
+        } else {
+            apiCall();
+        }
+
         return view;
     }
 
     private void apiCall() {
+        String BASE_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
