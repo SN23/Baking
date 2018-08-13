@@ -27,8 +27,6 @@ import butterknife.ButterKnife;
 public class RecipeDetailActivity extends AppCompatActivity implements RecipeStepNameAdapter.RecipeStepItemClickListener {
 
     private FragmentManager fragmentManager;
-    private RecipeDetailsFragment recipeDetailsFragment;
-    private RecipeStepFragment recipeStepFragment;
     private boolean twoPane;
     private int totalNumberOfSteps;
     private List<Step> steps;
@@ -69,7 +67,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
         twoPane = getResources().getBoolean(R.bool.twoPaneMode);
         if (twoPane) {
 
-            recipeStepFragment = new RecipeStepFragment();
+            RecipeStepFragment recipeStepFragment = new RecipeStepFragment();
             Bundle stepBundle = new Bundle();
             stepBundle.putParcelable("step", steps.get(0));
             recipeStepFragment.setArguments(stepBundle);
@@ -86,7 +84,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
                 public void onClick(View view) {
                     if (pos < steps.size() - 1) {
                         pos++;
-                        stepNumberTV.setText(pos + "/" + totalNumberOfSteps);
+                        String stepNumber = pos + "/" + totalNumberOfSteps;
+                        stepNumberTV.setText(stepNumber);
                         Bundle bundle = new Bundle();
                         RecipeStepFragment recipeStepFragment = new RecipeStepFragment();
                         bundle.putParcelable("step", steps.get(pos));
@@ -107,7 +106,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
                 public void onClick(View view) {
                     if (pos > 0) {
                         pos--;
-                        stepNumberTV.setText((pos) + "/" + totalNumberOfSteps);
+                        String stepNumber = pos + "/" + totalNumberOfSteps;
+                        stepNumberTV.setText(stepNumber);
                         Bundle bundle = new Bundle();
                         RecipeStepFragment recipeStepFragment = new RecipeStepFragment();
                         bundle.putParcelable("step", steps.get(pos));
@@ -124,7 +124,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
             });
         }
 
-        recipeDetailsFragment = new RecipeDetailsFragment();
+        RecipeDetailsFragment recipeDetailsFragment = new RecipeDetailsFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("stepsList", (ArrayList<? extends Parcelable>) steps);
         bundle.putParcelableArrayList("ingredientsList", (ArrayList<? extends Parcelable>) ingredients);
@@ -141,7 +141,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
 
         RecipeStepFragment recipeStepFragment = new RecipeStepFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        pos = position;
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("step", step);
@@ -155,7 +154,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeSte
 
         } else {
             buttonLayout.setVisibility(View.VISIBLE);
-            stepNumberTV.setText(position + "/" + totalNumberOfSteps);
+            String stepNumber = position + "/" + totalNumberOfSteps;
+            stepNumberTV.setText(stepNumber);
 
             fragmentManager.beginTransaction()
                     .replace(R.id.recipe_details_container, recipeStepFragment)
