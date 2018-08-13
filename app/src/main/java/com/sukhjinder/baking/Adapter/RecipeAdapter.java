@@ -34,7 +34,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecipeAdapter.ViewHolder holder, int position) {
         holder.bind(recipes.get(position));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -67,8 +67,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         public void bind(final Recipe recipe) {
             recipeName.setText(recipe.getName());
-            recipeServings.setText(Integer.toString(recipe.getServings()));
-            recipeSteps.setText(Integer.toString(recipe.getSteps().size() - 1));
+            String recipeServingSize = Integer.toString(recipe.getServings());
+            recipeServings.setText(recipeServingSize);
+            String recipeSize = Integer.toString(recipe.getSteps().size() - 1);
+            recipeSteps.setText(recipeSize);
         }
     }
 
