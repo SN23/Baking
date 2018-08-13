@@ -70,12 +70,14 @@ public class RecipeDetailsFragment extends Fragment {
     private void displayIngredientsList(List<Ingredient> ingredientList) {
         StringBuilder builder = new StringBuilder();
         for (Ingredient ingredient : ingredientList) {
-            builder.append("\u2022" + " ");
-            builder.append(ingredient.getQuantity() + " ");
-            builder.append(ingredient.getMeasure() + " ");
-            builder.append(ingredient.getIngredient());
-            builder.append('\n');
-            builder.append('\n');
+            builder.append("\u2022" + " ")
+                    .append(ingredient.getQuantity())
+                    .append(" ")
+                    .append(ingredient.getMeasure())
+                    .append(" ")
+                    .append(ingredient.getIngredient())
+                    .append('\n')
+                    .append('\n');
         }
         ingredientsTV.setText(builder.toString());
     }
