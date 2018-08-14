@@ -1,6 +1,7 @@
 package com.sukhjinder.baking;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.sukhjinder.baking.Adapter.RecipeStepNameAdapter;
 import com.sukhjinder.baking.Model.Ingredient;
 import com.sukhjinder.baking.Model.Step;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,6 +33,8 @@ public class RecipeDetailsFragment extends Fragment {
 
     private List<Step> steps;
     private List<Ingredient> ingredients;
+    private final static String RECIPE_DETAILS_STEPS = "recipeDetailSteps";
+    private final static String RECIPE_DETAILS_INGREDIENTS = "recipeDetailIngredients";
 
     public RecipeDetailsFragment() {
 
@@ -45,6 +49,26 @@ public class RecipeDetailsFragment extends Fragment {
             steps = args.getParcelableArrayList("stepsList");
             ingredients = args.getParcelableArrayList("ingredientsList");
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (steps != null && ingredients != null) {
+            outState.putParcelableArrayList(RECIPE_DETAILS_STEPS, (ArrayList<? extends Parcelable>) steps);
+            outState.putParcelableArrayList(RECIPE_DETAILS_INGREDIENTS, (ArrayList<? extends Parcelable>) ingredients);
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null && savedInstanceState.containsKey(RECIPE_DETAILS_STEPS) &&
+                savedInstanceState.containsKey(RECIPE_DETAILS_INGREDIENTS)) {
+            steps = savedInstanceState.getParcelableArrayList(RECIPE_DETAILS_STEPS);
+            ingredients = savedInstanceState.getParcelableArrayList(RECIPE_DETAILS_INGREDIENTS);
+        }
+
     }
 
     @Nullable
