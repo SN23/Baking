@@ -2,8 +2,22 @@
     <string name="app_name">Baking</string>
     <string name="servings">Servings:</string>
     <string name="steps">Steps:</string>
+    <string name="Steps">Steps</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="ingredients">Ingredients</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="added_to_widget">Recipe %s added to widget</string>
+
+
+
+    <string name="widget_recipe_key">widget_recipe_key</string>
+    <string name="add_recipe_to_widget">Add recipe to widget</string>
+    <string name="add_to_widget_menu_item">Add to widget</string>
+
 
 </resources>
