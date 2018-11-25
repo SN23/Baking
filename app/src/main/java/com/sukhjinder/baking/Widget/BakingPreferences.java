@@ -1,4 +1,4 @@
-package com.sukhjinder.baking;
+package com.sukhjinder.baking.Widget;
 
 import android.content.Context;
 import android.content.SharedPreferences;
