@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recipe_details_container_layout_width">350dp</dimen>
+    <dimen name="recipe_step_container_layout_margin">25dp</dimen>
+    <dimen name="recipe_step_container_padding">25dp</dimen>
+    <dimen name="fragment_recipe_step_exo_player_layout_height">300dp</dimen>
+</resources>

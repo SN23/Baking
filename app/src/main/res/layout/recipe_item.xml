@@ -4,55 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginBottom="@dimen/recipe_item_card_view_margin_bottom"
+    android:layout_marginLeft="@dimen/recipe_item_card_view_margin_left"
+    android:layout_marginRight="@dimen/recipe_item_card_view_margin_right"
+    android:layout_marginTop="@dimen/recipe_item_card_view_margin_top"
     android:clickable="true"
-    app:cardCornerRadius="10dp"
-
-    app:cardElevation="5dp">
+    android:focusable="true"
+    app:cardCornerRadius="@dimen/recipe_item_card_view_card_corner_radius"
+    app:cardElevation="@dimen/recipe_item_card_view_card_elevation">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp">
+        android:paddingBottom="@dimen/recipe_item_contraint_layout_padding_bottom">
 
         <TextView
             android:id="@+id/recipe_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:textSize="24sp"
+            android:layout_marginStart="@dimen/recipe_item_recipe_name_tv_margin_start"
+            android:layout_marginTop="@dimen/recipe_item_recipe_name_tv_margin_top"
+            android:textSize="@dimen/recipe_item_recipe_name_tv_text_size"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Nutella Pie" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/steps_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/recipe_item_step_label_margin_top"
             android:text="@string/steps"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintStart_toStartOf="@+id/servings_label"
+            app:layout_constraintTop_toBottomOf="@+id/servings_label" />
 
         <TextView
             android:id="@+id/recipe_steps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView"
+            android:layout_marginStart="@dimen/recipe_item_recipe_steps_tv_margin_start"
+            app:layout_constraintStart_toEndOf="@+id/steps_label"
+            app:layout_constraintTop_toTopOf="@+id/steps_label"
             tools:text="10" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/servings_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/recipe_item_servings_label_margin_top"
             android:text="@string/servings"
             app:layout_constraintStart_toStartOf="@+id/recipe_name"
             app:layout_constraintTop_toBottomOf="@+id/recipe_name" />
@@ -61,9 +61,9 @@
             android:id="@+id/recipe_servings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2"
+            android:layout_marginStart="@dimen/recipe_item_recipe_servings_tv_margin_start"
+            app:layout_constraintStart_toEndOf="@+id/servings_label"
+            app:layout_constraintTop_toTopOf="@+id/servings_label"
             tools:text="8" />
 
 

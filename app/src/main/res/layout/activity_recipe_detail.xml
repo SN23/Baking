@@ -15,9 +15,6 @@
             android:id="@+id/recipe_details_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:paddingBottom="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,11 +34,11 @@
                 android:id="@+id/previous_step_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Previous"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="@dimen/step_button_margin_bottom"
+                android:layout_marginStart="@dimen/prev_button_margin_start"
+                android:layout_marginTop="@dimen/step_button_margin_top"
+                android:text="@string/previous"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -49,11 +46,11 @@
                 android:id="@+id/next_step_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Next"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="@dimen/step_button_margin_bottom"
+                android:layout_marginEnd="@dimen/next_button_margin_end"
+                android:layout_marginTop="@dimen/step_button_margin_top"
+                android:text="@string/next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -62,8 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="TextView"
-                android:textSize="18sp"
+                android:textSize="@dimen/step_number_tv_text_size"
                 tools:text="1/7" />
         </RelativeLayout>
     </android.support.constraint.ConstraintLayout>
