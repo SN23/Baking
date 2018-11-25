@@ -5,7 +5,6 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.sukhjinder.baking.Model.Recipe;
-import com.sukhjinder.baking.BakingPreferences;
 import com.sukhjinder.baking.R;
 
 public class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {

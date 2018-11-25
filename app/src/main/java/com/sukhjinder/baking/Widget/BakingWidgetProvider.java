@@ -9,7 +9,6 @@ import android.widget.RemoteViews;
 
 import com.sukhjinder.baking.MainActivity;
 import com.sukhjinder.baking.Model.Recipe;
-import com.sukhjinder.baking.BakingPreferences;
 import com.sukhjinder.baking.R;
 
 /**

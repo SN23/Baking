@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.widget.RemoteViewsService;
 
 import com.sukhjinder.baking.Model.Recipe;
-import com.sukhjinder.baking.BakingPreferences;
 
 public class BakingWidgetService extends RemoteViewsService {
 
