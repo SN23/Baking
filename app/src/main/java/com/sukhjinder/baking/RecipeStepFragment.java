@@ -26,7 +26,6 @@ import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.upstream.TransferListener;
 import com.google.android.exoplayer2.util.Util;
 import com.sukhjinder.baking.Model.Step;
 
@@ -37,11 +36,6 @@ public class RecipeStepFragment extends Fragment {
 
     private Step step;
     private SimpleExoPlayer exoPlayer;
-    private String videoURL;
-    private BandwidthMeter bandwidthMeter;
-    private TrackSelector trackSelector;
-    private DataSource.Factory dataSourceFactory;
-
 
     @BindView(R.id.simpleExoPlayerView)
     SimpleExoPlayerView exoPlayerView;
@@ -61,6 +55,23 @@ public class RecipeStepFragment extends Fragment {
         if (args != null) {
             step = args.getParcelable("step");
         }
+        setRetainInstance(true);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (step != null) {
+            outState.putParcelable("STEP", step);
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null && savedInstanceState.containsKey("STEP")) {
+            step = savedInstanceState.getParcelable("STEP");
+        }
     }
 
     @Override
@@ -79,9 +90,11 @@ public class RecipeStepFragment extends Fragment {
 
         instructionsTV.setText(step.getDescription());
 
-        videoURL = step.getVideoURL();
-        if (videoURL.isEmpty() != true) {
+        String videoURL = step.getVideoURL();
+        if (!videoURL.isEmpty()) {
             initializePlayer(step.getVideoURL());
+        } else {
+            exoPlayerView.setVisibility(View.GONE);
         }
 
         return view;
@@ -92,13 +105,13 @@ public class RecipeStepFragment extends Fragment {
         if (exoPlayer == null) {
             exoPlayerView.requestFocus();
 
-            bandwidthMeter = new DefaultBandwidthMeter();
-            dataSourceFactory = new DefaultDataSourceFactory(getContext(), Util.getUserAgent(getContext(), "mediaPlayerSample"), (TransferListener<? super DataSource>) bandwidthMeter);
+            BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+            DataSource.Factory dataSourceFactory;
 
             LoadControl loadControl = new DefaultLoadControl();
             TrackSelection.Factory videoTrackSelectionFactory =
                     new AdaptiveVideoTrackSelection.Factory(bandwidthMeter);
-            trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
+            TrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
 
             exoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
             exoPlayerView.setPlayer(exoPlayer);
@@ -110,7 +123,6 @@ public class RecipeStepFragment extends Fragment {
 
             MediaSource mediaSource = new ExtractorMediaSource(Uri.parse(videoURL),
                     dataSourceFactory, extractorsFactory, null, null);
-
 
             exoPlayer.prepare(mediaSource);
         }

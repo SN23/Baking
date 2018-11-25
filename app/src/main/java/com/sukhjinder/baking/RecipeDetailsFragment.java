@@ -68,7 +68,6 @@ public class RecipeDetailsFragment extends Fragment {
             steps = savedInstanceState.getParcelableArrayList(RECIPE_DETAILS_STEPS);
             ingredients = savedInstanceState.getParcelableArrayList(RECIPE_DETAILS_INGREDIENTS);
         }
-
     }
 
     @Nullable
@@ -91,8 +90,11 @@ public class RecipeDetailsFragment extends Fragment {
         recipeStepsRecyclerView.setAdapter(new RecipeStepNameAdapter(steps, (RecipeDetailActivity) getActivity()));
     }
 
-    private void displayIngredientsList(List<Ingredient> ingredientList) {
+    private ArrayList<String> displayIngredientsList(List<Ingredient> ingredientList) {
         StringBuilder builder = new StringBuilder();
+
+        ArrayList<String> recipeIngredientsWidgetList = new ArrayList<>();
+
         for (Ingredient ingredient : ingredientList) {
             builder.append("\u2022" + " ")
                     .append(ingredient.getQuantity())
@@ -102,7 +104,10 @@ public class RecipeDetailsFragment extends Fragment {
                     .append(ingredient.getIngredient())
                     .append('\n')
                     .append('\n');
+            recipeIngredientsWidgetList.add(builder.toString());
         }
         ingredientsTV.setText(builder.toString());
+
+        return recipeIngredientsWidgetList;
     }
 }
