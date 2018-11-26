@@ -1,4 +1,4 @@
-package com.sukhjinder.baking;
+package com.sukhjinder.baking.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +20,9 @@ import com.sukhjinder.baking.Adapter.RecipeStepNameAdapter;
 import com.sukhjinder.baking.Model.Ingredient;
 import com.sukhjinder.baking.Model.Recipe;
 import com.sukhjinder.baking.Model.Step;
+import com.sukhjinder.baking.R;
+import com.sukhjinder.baking.Fragments.RecipeDetailsFragment;
+import com.sukhjinder.baking.Fragments.RecipeStepFragment;
 import com.sukhjinder.baking.Widget.BakingWidgetService;
 
 import java.util.ArrayList;

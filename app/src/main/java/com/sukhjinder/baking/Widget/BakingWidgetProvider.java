@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-import com.sukhjinder.baking.MainActivity;
+import com.sukhjinder.baking.Activities.MainActivity;
 import com.sukhjinder.baking.Model.Recipe;
 import com.sukhjinder.baking.R;
 

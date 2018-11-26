@@ -1,4 +1,4 @@
-package com.sukhjinder.baking;
+package com.sukhjinder.baking.Fragments;
 
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -13,11 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sukhjinder.baking.API.RecipeAPI;
+import com.sukhjinder.baking.Activities.MainActivity;
 import com.sukhjinder.baking.Adapter.RecipeAdapter;
+import com.sukhjinder.baking.GlobalApplication;
 import com.sukhjinder.baking.Model.Recipe;
+import com.sukhjinder.baking.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +38,7 @@ public class RecipesFragment extends Fragment {
 
     private List<Recipe> recipes;
     private final static String RECIPE_NAME_LIST = "recipeNameList";
+    private GlobalApplication globalApplication;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +70,9 @@ public class RecipesFragment extends Fragment {
         ButterKnife.bind(this, view);
         recyclerSetup();
 
+        globalApplication = (GlobalApplication) Objects.requireNonNull(getActivity()).getApplicationContext();
+        globalApplication.setIdleState(false);
+
         if (savedInstanceState != null && savedInstanceState.containsKey(RECIPE_NAME_LIST)) {
             recipes = savedInstanceState.getParcelableArrayList(RECIPE_NAME_LIST);
             recipeRecyclerView.setAdapter(new RecipeAdapter(recipes, (MainActivity) getActivity()));
@@ -84,13 +92,15 @@ public class RecipesFragment extends Fragment {
 
         RecipeAPI client = retrofit.create(RecipeAPI.class);
         Call<List<Recipe>> call = client.getRecipes();
-
         call.enqueue(new Callback<List<Recipe>>() {
 
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 recipes = response.body();
                 recipeRecyclerView.setAdapter(new RecipeAdapter(recipes, (MainActivity) getActivity()));
+                if (globalApplication.getIdlingResource() != null) {
+                    globalApplication.setIdleState(true);
+                }
             }
 
             @Override
@@ -101,7 +111,6 @@ public class RecipesFragment extends Fragment {
     }
 
     private void recyclerSetup() {
-
         boolean twoPane = getResources().getBoolean(R.bool.twoPaneMode);
         if (twoPane) {
             recipeRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/fragment_recipe_details_constraint_layout_padding_bottom"
-    tools:context=".RecipeDetailsFragment">
+    tools:context=".Fragments.RecipeDetailsFragment">
 
     <TextView
         android:id="@+id/IngredientTitle"

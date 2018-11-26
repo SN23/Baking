@@ -1,4 +1,4 @@
-package com.sukhjinder.baking;
+package com.sukhjinder.baking.Fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +28,7 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.sukhjinder.baking.Model.Step;
+import com.sukhjinder.baking.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.sukhjinder.baking;
+package com.sukhjinder.baking.Fragments;
 
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -12,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sukhjinder.baking.Activities.RecipeDetailActivity;
 import com.sukhjinder.baking.Adapter.RecipeStepNameAdapter;
 import com.sukhjinder.baking.Model.Ingredient;
 import com.sukhjinder.baking.Model.Step;
+import com.sukhjinder.baking.R;
 
 import java.util.ArrayList;
 import java.util.List;
