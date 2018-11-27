@@ -38,6 +38,10 @@ public class RecipeStepFragment extends Fragment {
     private Step step;
     private SimpleExoPlayer exoPlayer;
 
+    private final static String EXO_PLAYER_POSITION = "exoPlayerPosition";
+    private final static String EXO_PLAYER_STATE = "exoPlayerState";
+    private final static String STEP = "STEP";
+
     @BindView(R.id.simpleExoPlayerView)
     SimpleExoPlayerView exoPlayerView;
 
@@ -63,15 +67,30 @@ public class RecipeStepFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         if (step != null) {
-            outState.putParcelable("STEP", step);
+            outState.putParcelable(STEP, step);
         }
+        outState.putLong(EXO_PLAYER_POSITION, exoPlayer.getCurrentPosition());
+        outState.putBoolean(EXO_PLAYER_STATE, exoPlayer.getPlayWhenReady());
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null && savedInstanceState.containsKey("STEP")) {
-            step = savedInstanceState.getParcelable("STEP");
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(STEP)) {
+                step = savedInstanceState.getParcelable(STEP);
+            }
+            if (savedInstanceState.containsKey(EXO_PLAYER_POSITION)) {
+                Long playerPosition = savedInstanceState.getLong(EXO_PLAYER_POSITION);
+                exoPlayer.seekTo(playerPosition);
+
+            }
+            if (savedInstanceState.containsKey(EXO_PLAYER_STATE)) {
+                boolean playerState = savedInstanceState.getBoolean(EXO_PLAYER_STATE);
+                exoPlayer.setPlayWhenReady(playerState);
+            }
+
+
         }
     }
 
