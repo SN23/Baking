@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -27,6 +28,7 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.picasso.Picasso;
 import com.sukhjinder.baking.Model.Step;
 import com.sukhjinder.baking.R;
 
@@ -47,6 +49,9 @@ public class RecipeStepFragment extends Fragment {
 
     @BindView(R.id.instructionsTV)
     TextView instructionsTV;
+
+    @BindView(R.id.thumbnail)
+    ImageView thumbnail;
 
     public RecipeStepFragment() {
 
@@ -69,8 +74,10 @@ public class RecipeStepFragment extends Fragment {
         if (step != null) {
             outState.putParcelable(STEP, step);
         }
-        outState.putLong(EXO_PLAYER_POSITION, exoPlayer.getCurrentPosition());
-        outState.putBoolean(EXO_PLAYER_STATE, exoPlayer.getPlayWhenReady());
+        if (exoPlayer != null) {
+            outState.putLong(EXO_PLAYER_POSITION, exoPlayer.getCurrentPosition());
+            outState.putBoolean(EXO_PLAYER_STATE, exoPlayer.getPlayWhenReady());
+        }
     }
 
     @Override
@@ -89,8 +96,6 @@ public class RecipeStepFragment extends Fragment {
                 boolean playerState = savedInstanceState.getBoolean(EXO_PLAYER_STATE);
                 exoPlayer.setPlayWhenReady(playerState);
             }
-
-
         }
     }
 
@@ -121,10 +126,18 @@ public class RecipeStepFragment extends Fragment {
         instructionsTV.setText(step.getDescription());
 
         String videoURL = step.getVideoURL();
+        thumbnail.setVisibility(View.GONE);
         if (!videoURL.isEmpty()) {
             initializePlayer(step.getVideoURL());
         } else {
             exoPlayerView.setVisibility(View.GONE);
+            thumbnail.setVisibility(View.VISIBLE);
+            String thumbnailURL = step.getThumbnailURL();
+            if (thumbnailURL != null && !(thumbnailURL.isEmpty()) && !thumbnailURL.contains("mp4")) {
+                Picasso.get().load(step.getThumbnailURL()).into(thumbnail);
+            } else {
+                Picasso.get().load(R.drawable.food_icon).into(thumbnail);
+            }
         }
 
         return view;
